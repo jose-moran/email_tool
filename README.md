@@ -57,7 +57,7 @@ if __name__ == "__main__":
 and you will receive an email with a message that looks like 
 
 ```
-Script in file: /Users/jmoran/Projects/tools/email_tool/email_tool/email_tool.py
+Script in file: /path/to/your_file.py
 
 Script started at 08/08/2024 11h54:17 Europe/Paris and ended at 08/08/2024 11h54:32 Europe/Paris.
 The script ran for 15.004801034927368 seconds.
