@@ -11,7 +11,7 @@ def send_email(msg: str, header: str, recipient: str) -> None:
     env.read_env()
 
     smtp_server = env("SMTP_SERVER")
-    port = env.int("PORT")
+    port = env.int("SMTP_PORT")
     email = env("EMAIL")
     password = env("PASSWORD")
 
