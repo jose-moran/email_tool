@@ -10,7 +10,7 @@ with open(join(this_dir, "requirements.txt")) as f:
 
 setup(
     name="email_tool",
-    version="",
+    version="0.1.0",
     packages=["email_tool"],
     url="",
     license="",
