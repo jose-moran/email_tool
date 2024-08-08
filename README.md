@@ -1,6 +1,9 @@
 # Email tool
 
-This is a simple email tool that sends emails to a list of recipients. It is written in Python and uses the smtplib library to send emails.
+This is a simple email tool that sends emails to a list of recipients. It is written in Python and uses the smtplib
+library to send emails.
+
+The `MailSender` class is from [Luca Mungo](https://github.com/lucamungo/).
 
 ## Installation
 
