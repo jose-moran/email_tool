@@ -33,25 +33,24 @@ Then, you can use the email tool as follows, in a file called your_file.py
 import time
 from email_tool import send_email, get_time
 
-if __name__ == "__main__":
-    start_time = get_time()
+start_time = get_time()
 
-    chron_start = time.time()
-    time.sleep(15)
-    chron_end = time.time()
+chron_start = time.time()
+time.sleep(15)
+chron_end = time.time()
 
-    end_time = get_time()
+end_time = get_time()
 
-    run_time = chron_end - chron_start
+run_time = chron_end - chron_start
 
-    msg = f"""
-    Script started at {start_time} and ended at {end_time}.
-    The script ran for {run_time} seconds.
-    """
-    
-    send_email(msg=msg,
-               header="Script finished running",
-               recipient="you@email.com")
+msg = f"""
+Script started at {start_time} and ended at {end_time}.
+The script ran for {run_time} seconds.
+"""
+
+send_email(msg=msg,
+           header="Script finished running",
+           recipient="you@email.com")
 ```
 
 and you will receive an email with a message that looks like 
@@ -76,11 +75,10 @@ send emails if the script finishes with an error, with the trace of the error. H
 
 from email_tool import EmailMonitor
 
-if __name__ == "__main__":
-    with EmailMonitor(msg="Default message if no error",
-                        header="message",
-                        recipient="you@email.com"):
-        pass
+with EmailMonitor(msg="Default message if no error",
+                    header="message",
+                    recipient="you@email.com"):
+    pass
 ```
 
 with this, no error will be raised, and you will receive an email with the message "Default message if no error",
@@ -92,11 +90,10 @@ Instead, if you run the following code:
 ```python
 from email_tool import EmailMonitor
 
-if __name__ == "__main__":
-    with EmailMonitor(msg="Default message if no error",
-                        header="message",
-                        recipient="you@email.com"): 
-        raise ValueError("This is an error")
+with EmailMonitor(msg="Default message if no error",
+                    header="message",
+                    recipient="you@email.com"): 
+    raise ValueError("This is an error")
 ```
 
 you will receive an email with the message "This is an error" and the traceback of the error, along with the time when the script 
