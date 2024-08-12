@@ -67,3 +67,37 @@ End.
 
 The `get_time` function is a helper function that returns the current time in a human-readable format with an attached
 timezone, which is Europe/Paris by default. You can change the timezone by passing a string to the `timezone` argument.
+
+
+There is also a context manager built on top called `EmailMonitor`. The point of this is to be able to
+send emails if the script finishes with an error, with the trace of the error. Here is an example of how to use it:
+
+```python
+
+from email_tool import EmailMonitor
+
+if __name__ == "__main__":
+    with EmailMonitor(msg="Default message if no error",
+                        header="message",
+                        recipient="you@email.com"):
+        pass
+```
+
+with this, no error will be raised, and you will receive an email with the message "Default message if no error",
+along with the time corresponding to the exit of the context manager. You can pass a `timezone` argument to the context
+manager to change the timezone, which is Europe/Paris by default.
+
+Instead, if you run the following code:
+
+```python
+from email_tool import EmailMonitor
+
+if __name__ == "__main__":
+    with EmailMonitor(msg="Default message if no error",
+                        header="message",
+                        recipient="you@email.com"): 
+        raise ValueError("This is an error")
+```
+
+you will receive an email with the message "This is an error" and the traceback of the error, along with the time when the script 
+stopped because of the error.
