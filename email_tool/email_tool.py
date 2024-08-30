@@ -35,13 +35,25 @@ class EmailMonitor:
     Context manager to monitor code execution and send an email, with the option to send an email in case of an error.
     """
 
-    def __init__(self, msg: str, header: str, recipient: str, timezone: str = "Europe/Paris"):
+    def __init__(
+        self,
+        enter_msg: str,
+        exit_msg: str,
+        header: str,
+        recipient: str,
+        timezone: str = "Europe/Paris",
+    ):
         self.recipient = recipient
         self.header = header
-        self.msg = msg
+        self.enter_msg = enter_msg
+        self.exit_msg = exit_msg
         self.msg_timezone = timezone
 
     def __enter__(self):
+        self.enter_msg += (
+            f"\n\nScript execution started at {get_time(self.msg_timezone)}."
+        )
+        send_email(msg=self.enter_msg, header=self.header, recipient=self.recipient)
         return self  # Return context manager object if needed
 
     def __exit__(self, exc_type, exc_value, tb):
@@ -58,6 +70,6 @@ class EmailMonitor:
             return False  # Change to True if you do not want to propagate the exception
         else:
             exec_time = get_time(self.msg_timezone)
-            self.msg += f"\n\nScript execution completed at {exec_time}."
-            send_email(msg=self.msg, header=self.header, recipient=self.recipient)
+            self.exit_msg += f"\n\nScript execution completed at {exec_time}."
+            send_email(msg=self.exit_msg, header=self.header, recipient=self.recipient)
             return True
